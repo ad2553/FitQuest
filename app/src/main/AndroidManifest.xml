@@ -12,7 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FitQuest">
         <activity
-            android:name=".MainActivity"
+            android:name=".activites.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activites.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activites.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
