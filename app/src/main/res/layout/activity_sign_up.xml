@@ -40,12 +40,14 @@
             android:text="Username"
             android:textColor="#111827"
             android:textSize="16sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:gravity="center_vertical"
             android:paddingStart="12dp"
             android:paddingEnd="12dp">
+
             <EditText
                 android:id="@+id/usernameInput"
                 android:layout_width="0dp"
@@ -55,18 +57,16 @@
                 android:background="@android:color/transparent"
                 android:padding="8dp" />
         </LinearLayout>
-        <!-- Email Label -->
+
+        <!-- Email -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:paddingStart="4dp"
-            android:paddingEnd="4dp"
             android:text="Email address"
             android:textColor="#111827"
             android:textSize="16sp" />
 
-        <!-- Email Input -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
@@ -86,18 +86,15 @@
                 android:padding="8dp" />
         </LinearLayout>
 
-        <!-- Password Label -->
+        <!-- Password -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:paddingStart="4dp"
-            android:paddingEnd="4dp"
             android:text="Password"
             android:textColor="#111827"
             android:textSize="16sp" />
 
-        <!-- Password Input -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
@@ -113,9 +110,9 @@
                 android:hint="••••••••"
                 android:background="@android:color/transparent"
                 android:inputType="textPassword"
-                android:textDirection="rtl"
                 android:padding="8dp" />
         </LinearLayout>
+
         <!-- Age -->
         <TextView
             android:layout_width="match_parent"
@@ -124,12 +121,14 @@
             android:text="Age"
             android:textColor="#111827"
             android:textSize="16sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:gravity="center_vertical"
             android:paddingStart="12dp"
             android:paddingEnd="12dp">
+
             <EditText
                 android:id="@+id/ageInput"
                 android:layout_width="0dp"
@@ -149,12 +148,14 @@
             android:text="Weight (kg)"
             android:textColor="#111827"
             android:textSize="16sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:gravity="center_vertical"
             android:paddingStart="12dp"
             android:paddingEnd="12dp">
+
             <EditText
                 android:id="@+id/weightInput"
                 android:layout_width="0dp"
@@ -174,12 +175,14 @@
             android:text="Height (cm)"
             android:textColor="#111827"
             android:textSize="16sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:gravity="center_vertical"
             android:paddingStart="12dp"
             android:paddingEnd="12dp">
+
             <EditText
                 android:id="@+id/heightInput"
                 android:layout_width="0dp"
@@ -199,12 +202,14 @@
             android:text="Fitness Goal"
             android:textColor="#111827"
             android:textSize="16sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:gravity="center_vertical"
             android:paddingStart="12dp"
             android:paddingEnd="12dp">
+
             <EditText
                 android:id="@+id/goalInput"
                 android:layout_width="0dp"
@@ -223,12 +228,14 @@
             android:text="Activity Level"
             android:textColor="#111827"
             android:textSize="16sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:gravity="center_vertical"
             android:paddingStart="12dp"
             android:paddingEnd="12dp">
+
             <EditText
                 android:id="@+id/activityInput"
                 android:layout_width="0dp"
@@ -246,17 +253,39 @@
             android:layout_height="48dp"
             android:layout_marginTop="24dp"
             android:backgroundTint="@android:color/black"
+            android:onClick="createUser"
             android:text="Sign Up"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
-        <!-- Link to Login -->
+        <!-- Message -->
+        <TextView
+            android:id="@+id/msgText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#B00020"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"/>
+
+        <!-- Login link -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_marginTop="12dp">
+
+            <Button
+                android:id="@+id/goToLoginBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:onClick="goToLogin"
+                android:text="Log In"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -266,18 +295,8 @@
                 android:textSize="16sp"
                 android:layout_marginEnd="8dp" />
 
-            <Button
-                android:id="@+id/goToLoginBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:text="Log In"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textAllCaps="false"
-                android:onClick="goToLogin" />
-
         </LinearLayout>
 
     </LinearLayout>
+
 </ScrollView>

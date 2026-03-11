@@ -12,10 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FitQuest">
         <activity
+            android:name=".activites.HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".activites.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".activites.LoginActivity"
+            android:name=".activites.LogInActivity"
             android:exported="false" />
         <activity
             android:name=".activites.MainActivity"
