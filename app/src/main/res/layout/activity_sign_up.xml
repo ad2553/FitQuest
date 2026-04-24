@@ -212,7 +212,7 @@
             android:background="@android:color/white">
 
             <Spinner
-                android:id="@+id/spinnerGoalInput"
+                android:id="@+id/goalSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>

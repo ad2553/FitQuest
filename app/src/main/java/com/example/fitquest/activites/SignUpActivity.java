@@ -46,7 +46,7 @@ public class SignUpActivity extends AppCompatActivity {
         eTAge      = findViewById(R.id.ageInput);
         eTWeight   = findViewById(R.id.weightInput);
         eTHeight   = findViewById(R.id.heightInput);
-        spinnerGoal = findViewById(R.id.spinnerGoalInput);
+        spinnerGoal = findViewById(R.id.goalSpinner);
         eTActivity = findViewById(R.id.activityInput);
         tVMsg      = findViewById(R.id.msgText);
 
@@ -123,7 +123,7 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
     }
-    /** כפתור "Log In" בתחתית מסך ההרשמה */
+
     public void goToLogin(View view) {
         Intent intent = new Intent(this, LogInActivity.class);
         startActivity(intent);
