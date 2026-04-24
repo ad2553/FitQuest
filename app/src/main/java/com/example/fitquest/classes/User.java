@@ -13,7 +13,7 @@ public class User {
     private double weight;
     private double height;
     private String fitnessGoal;
-    private String activityLevel;
+    private int activityLevel;
     private int totalWorkoutsCompleted;
     private String createdAt;                        // ISO-8601: "2025-04-24"
     private Map<String, MuscleGroup> muscleGroups;   // key = muscleId
@@ -25,7 +25,7 @@ public class User {
     // קונסטרקטור הרשמה – שדות בסיסיים בלבד, MuscleGroups מאותחלים אוטומטית
     public User(String uid, String username, String email,
                 int age, double weight, double height,
-                String fitnessGoal, String activityLevel, String createdAt) {
+                String fitnessGoal, int activityLevel, String createdAt) {
 
         this.uid = uid;
         this.username = username;
@@ -78,8 +78,8 @@ public class User {
     public String getFitnessGoal() { return fitnessGoal; }
     public void setFitnessGoal(String fitnessGoal) { this.fitnessGoal = fitnessGoal; }
 
-    public String getActivityLevel() { return activityLevel; }
-    public void setActivityLevel(String activityLevel) { this.activityLevel = activityLevel; }
+    public int getActivityLevel() { return activityLevel; }
+    public void setActivityLevel(int activityLevel) { this.activityLevel = activityLevel; }
 
     public int getTotalWorkoutsCompleted() { return totalWorkoutsCompleted; }
     public void setTotalWorkoutsCompleted(int totalWorkoutsCompleted) { this.totalWorkoutsCompleted = totalWorkoutsCompleted; }

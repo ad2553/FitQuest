@@ -241,7 +241,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:hint="e.g., Medium"
+                android:hint="1-5 (1=Low, 5=High)"
+                android:inputType="number"
                 android:background="@android:color/transparent"
                 android:padding="8dp" />
         </LinearLayout>

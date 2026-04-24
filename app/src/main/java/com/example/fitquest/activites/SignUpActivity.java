@@ -87,7 +87,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     Double.parseDouble(eTWeight.getText().toString()),
                                     Double.parseDouble(eTHeight.getText().toString()),
                                     eTGoal.getText().toString().trim(),
-                                    eTActivity.getText().toString().trim(),
+                                    Integer.parseInt(eTActivity.getText().toString()),
                                     createdAt
                             );
 

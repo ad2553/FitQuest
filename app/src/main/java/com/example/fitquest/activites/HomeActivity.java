@@ -13,9 +13,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.example.fitquest.R;
+import com.example.fitquest.fragments.HistoryFragment;
 import com.example.fitquest.fragments.HomeFragment;
 import com.example.fitquest.fragments.ProfileFragment;
-import com.example.fitquest.fragments.ProgramsFragment;
 import com.example.fitquest.fragments.ProgressFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -48,8 +48,8 @@ public class HomeActivity extends AppCompatActivity {
 
             if (itemId == R.id.nav_home) {
                 selectedFragment = new HomeFragment();
-            } else if (itemId == R.id.nav_programs) {
-                selectedFragment = new ProgramsFragment();
+            } else if (itemId == R.id.nav_history) {
+                selectedFragment = new HistoryFragment();
             } else if (itemId == R.id.nav_progress) {
                 selectedFragment = new ProgressFragment();
             } else if (itemId == R.id.nav_profile) {
