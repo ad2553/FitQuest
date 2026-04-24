@@ -20,12 +20,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.example.fitquest.receivers.NetworkReceiver;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import com.google.android.material.snackbar.Snackbar;
+import android.graphics.Color;
 
 import static com.example.fitquest.FBRef.refAuth;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements NetworkReceiver.NetworkListener {
 
     private NetworkReceiver networkReceiver;
+    private Snackbar noInternetSnackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +72,26 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         // אתחול ה-NetworkReceiver
-        networkReceiver = new NetworkReceiver();
+        networkReceiver = new NetworkReceiver(this);
+    }
+
+    @Override
+    public void onNetworkChanged(boolean isConnected) {
+        if (!isConnected) {
+            if (noInternetSnackbar == null) {
+                noInternetSnackbar = Snackbar.make(findViewById(R.id.fragmentContainer), 
+                        "No Internet Connection", Snackbar.LENGTH_INDEFINITE);
+                noInternetSnackbar.setBackgroundTint(Color.RED);
+                noInternetSnackbar.setTextColor(Color.WHITE);
+            }
+            if (!noInternetSnackbar.isShown()) {
+                noInternetSnackbar.show();
+            }
+        } else {
+            if (noInternetSnackbar != null && noInternetSnackbar.isShown()) {
+                noInternetSnackbar.dismiss();
+            }
+        }
     }
 
     @Override
