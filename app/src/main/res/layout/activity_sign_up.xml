@@ -208,16 +208,13 @@
             android:layout_height="55dp"
             android:gravity="center_vertical"
             android:paddingStart="12dp"
-            android:paddingEnd="12dp">
+            android:paddingEnd="12dp"
+            android:background="@android:color/white">
 
-            <EditText
-                android:id="@+id/goalInput"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:hint="e.g., Muscle gain"
-                android:background="@android:color/transparent"
-                android:padding="8dp" />
+            <Spinner
+                android:id="@+id/spinnerGoalInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <!-- Activity Level -->

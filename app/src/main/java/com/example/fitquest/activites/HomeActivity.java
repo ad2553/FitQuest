@@ -12,10 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import com.example.fitquest.R;
+import com.example.fitquest.fragments.CreditsFragment;
 import com.example.fitquest.fragments.HistoryFragment;
 import com.example.fitquest.fragments.HomeFragment;
 import com.example.fitquest.fragments.ProfileFragment;
 import com.example.fitquest.fragments.ProgressFragment;
+import com.example.fitquest.fragments.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.example.fitquest.receivers.NetworkReceiver;
 import android.content.IntentFilter;
@@ -120,10 +122,16 @@ public class HomeActivity extends AppCompatActivity implements NetworkReceiver.N
         int itemId = item.getItemId();
 
         if (itemId == R.id.menu_settings) {
-            Toast.makeText(this, "Settings coming soon", Toast.LENGTH_SHORT).show();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainer, new SettingsFragment())
+                    .addToBackStack(null)
+                    .commit();
             return true;
         } else if (itemId == R.id.menu_credits) {
-            Toast.makeText(this, "Credits coming soon", Toast.LENGTH_SHORT).show();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainer, new CreditsFragment())
+                    .addToBackStack(null)
+                    .commit();
             return true;
         } else if (itemId == R.id.menu_logout) {
             logout();

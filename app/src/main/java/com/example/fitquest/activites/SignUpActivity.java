@@ -10,7 +10,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.fitquest.R;
@@ -28,8 +30,10 @@ import java.util.Locale;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private EditText eTUsername, eTEmail, eTPass, eTAge, eTWeight, eTHeight, eTGoal, eTActivity;
+    private EditText eTUsername, eTEmail, eTPass, eTAge, eTWeight, eTHeight, eTActivity;
+    private Spinner spinnerGoal;
     private TextView tVMsg;
+    private final String[] goals = {"Build Muscle", "Lose Weight", "Stay Fit", "Powerlifting", "Endurance"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +46,13 @@ public class SignUpActivity extends AppCompatActivity {
         eTAge      = findViewById(R.id.ageInput);
         eTWeight   = findViewById(R.id.weightInput);
         eTHeight   = findViewById(R.id.heightInput);
-        eTGoal     = findViewById(R.id.goalInput);
+        spinnerGoal = findViewById(R.id.spinnerGoalInput);
         eTActivity = findViewById(R.id.activityInput);
         tVMsg      = findViewById(R.id.msgText);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, goals);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerGoal.setAdapter(adapter);
     }
 
     public void createUser(View view) {
@@ -86,7 +94,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     Integer.parseInt(eTAge.getText().toString()),
                                     Double.parseDouble(eTWeight.getText().toString()),
                                     Double.parseDouble(eTHeight.getText().toString()),
-                                    eTGoal.getText().toString().trim(),
+                                    spinnerGoal.getSelectedItem().toString(),
                                     Integer.parseInt(eTActivity.getText().toString()),
                                     createdAt
                             );
