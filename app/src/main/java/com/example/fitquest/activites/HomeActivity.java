@@ -27,9 +27,16 @@ import android.graphics.Color;
 
 import static com.example.fitquest.FBRef.refAuth;
 
+/**
+ * האקטיביטי המרכזית של האפליקציה (Master Activity).
+ * מנהלת את ה-Toolbar העליון, ה-Bottom Navigation ואת החלפת ה-Fragments השונים.
+ * בנוסף, מאזינה לשינויים בסטטוס הרשת באמצעות BroadcastReceiver.
+ */
 public class HomeActivity extends AppCompatActivity implements NetworkReceiver.NetworkListener {
 
+    /** רסיבר המאזין לשינויי קישוריות רשת */
     private NetworkReceiver networkReceiver;
+    /** הודעת Snackbar המוצגת כאשר אין חיבור אינטרנט */
     private Snackbar noInternetSnackbar;
 
     @Override
@@ -37,20 +44,20 @@ public class HomeActivity extends AppCompatActivity implements NetworkReceiver.N
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // הגדרת Toolbar
+        // הגדרת ה-Toolbar העליון
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // הגדרת BottomNavigationView
+        // הגדרת הניווט התחתון
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
 
-        // הצגת המסך הראשון (Today's Tasks) בטעינה הראשונית
+        // טעינת מסך הבית (המשימות של היום) כברירת מחדל
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragmentContainer, new HomeFragment()).commit();
         }
 
-        // ניווט בין ה-Fragments דרך הלשוניות
+        // הגדרת מאזין ללחיצות על כפתורי הניווט התחתון
         bottomNav.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
             int itemId = item.getItemId();
@@ -65,6 +72,7 @@ public class HomeActivity extends AppCompatActivity implements NetworkReceiver.N
                 selectedFragment = new ProfileFragment();
             }
 
+            // ביצוע החלפת ה-Fragment בתוך ה-Container
             if (selectedFragment != null) {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragmentContainer, selectedFragment).commit();
@@ -73,10 +81,15 @@ public class HomeActivity extends AppCompatActivity implements NetworkReceiver.N
             return false;
         });
 
-        // אתחול ה-NetworkReceiver
+        // אתחול הרסיבר לבדיקת רשת
         networkReceiver = new NetworkReceiver(this);
     }
 
+    /**
+     * פונקציית Callback המופעלת כאשר סטטוס הרשת משתנה.
+     * 
+     * @param isConnected True אם יש חיבור אינטרנט, False אחרת.
+     */
     @Override
     public void onNetworkChanged(boolean isConnected) {
         if (!isConnected) {
@@ -99,6 +112,7 @@ public class HomeActivity extends AppCompatActivity implements NetworkReceiver.N
     @Override
     protected void onStart() {
         super.onStart();
+        // רישום הרסיבר לקבלת עדכוני רשת
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(networkReceiver, filter);
     }
@@ -106,32 +120,31 @@ public class HomeActivity extends AppCompatActivity implements NetworkReceiver.N
     @Override
     protected void onStop() {
         super.onStop();
+        // ביטול רישום הרסיבר
         unregisterReceiver(networkReceiver);
     }
 
-    // טעינת תפריט האפשרויות (Settings, Credits, Logout)
+    /**
+     * יוצר את תפריט האפשרויות ב-Toolbar (Settings, Credits, Logout).
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
 
-    // טיפול בלחיצות על פריטי התפריט
+    /**
+     * מטפל בלחיצות על פריטי התפריט ב-Toolbar.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
 
         if (itemId == R.id.menu_settings) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentContainer, new SettingsFragment())
-                    .addToBackStack(null)
-                    .commit();
+            switchFragment(new SettingsFragment());
             return true;
         } else if (itemId == R.id.menu_credits) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentContainer, new CreditsFragment())
-                    .addToBackStack(null)
-                    .commit();
+            switchFragment(new CreditsFragment());
             return true;
         } else if (itemId == R.id.menu_logout) {
             logout();
@@ -141,10 +154,22 @@ public class HomeActivity extends AppCompatActivity implements NetworkReceiver.N
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * מחליף את ה-Fragment הנוכחי באחד חדש ומוסיף אותו ל-BackStack.
+     */
+    private void switchFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    /**
+     * מבצע התנתקות מהמערכת ומנקה את הגדרות ה-"זכור אותי".
+     */
     private void logout() {
         refAuth.signOut();
 
-        // איפוס אפשרות ה-"stayConnect" מבלי למחוק את האימייל והסיסמה השמורים
         SharedPreferences settings = getSharedPreferences("RemeberMe", MODE_PRIVATE);
         settings.edit().putBoolean("stayConnect", false).apply();
 
