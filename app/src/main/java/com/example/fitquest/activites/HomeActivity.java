@@ -11,17 +11,21 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-
 import com.example.fitquest.R;
 import com.example.fitquest.fragments.HistoryFragment;
 import com.example.fitquest.fragments.HomeFragment;
 import com.example.fitquest.fragments.ProfileFragment;
 import com.example.fitquest.fragments.ProgressFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.fitquest.receivers.NetworkReceiver;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 
 import static com.example.fitquest.FBRef.refAuth;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private NetworkReceiver networkReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +67,22 @@ public class HomeActivity extends AppCompatActivity {
             }
             return false;
         });
+
+        // אתחול ה-NetworkReceiver
+        networkReceiver = new NetworkReceiver();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkReceiver, filter);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(networkReceiver);
     }
 
     // טעינת תפריט האפשרויות (Settings, Credits, Logout)
