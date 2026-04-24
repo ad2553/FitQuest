@@ -47,8 +47,23 @@ public class LogInActivity extends AppCompatActivity {
 
         SharedPreferences settings = getSharedPreferences("RemeberMe", MODE_PRIVATE);
         boolean stayConnect = settings.getBoolean("stayConnect", false);
+        String savedEmail = settings.getString("email", "");
+        String savedPass = settings.getString("password", "");
 
+        // Auto-fill credentials if saved
+        if (!savedEmail.isEmpty()) {
+            eTEmail.setText(savedEmail);
+            cBStay.setChecked(true);
+        }
+        if (!savedPass.isEmpty()) {
+            eTPass.setText(savedPass);
+        }
 
+        // אם המשתמש בחר "זכור אותי" ועדיין מחובר – עבור ישירות לבית
+        if (stayConnect && refAuth.getCurrentUser() != null) {
+            goToHome();
+            return;
+        }
     }
 
     /**
@@ -76,8 +91,19 @@ public class LogInActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 SharedPreferences settings = getSharedPreferences("RemeberMe", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = settings.edit();
-                                editor.putBoolean("stayConnect", cBStay.isChecked());
+
+                                if (cBStay.isChecked()) {
+                                    editor.putString("email", email);
+                                    editor.putString("password", pass);
+                                    editor.putBoolean("stayConnect", true);
+                                } else {
+                                    editor.remove("email");
+                                    editor.remove("password");
+                                    editor.putBoolean("stayConnect", false);
+                                }
                                 editor.apply();
+
+                                goToHome();
 
                             } else {
                                 Toast.makeText(LogInActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
@@ -85,6 +111,14 @@ public class LogInActivity extends AppCompatActivity {
                         }
                     });
         }
+    }
+
+    /** מנווט למסך הבית וסוגר את מסך ה-Login. */
+    private void goToHome() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
     /**

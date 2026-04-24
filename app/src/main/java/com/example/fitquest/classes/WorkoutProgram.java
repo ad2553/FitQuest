@@ -1,6 +1,6 @@
 package com.example.fitquest.classes;
 
-import java.util.List;
+import java.util.Map;
 
 public class WorkoutProgram {
 
@@ -9,13 +9,13 @@ public class WorkoutProgram {
     private String date;
     private int level;
     private boolean isActive;
-    private List<WorkoutDay> days;
+    private Map<String, WorkoutDay> days;
 
     public WorkoutProgram() {
     }
 
     public WorkoutProgram(String programId, String programName, String date,
-                          int level, boolean isActive, List<WorkoutDay> days) {
+                          int level, boolean isActive, Map<String, WorkoutDay> days) {
         this.programId = programId;
         this.programName = programName;
         this.date = date;
@@ -39,6 +39,6 @@ public class WorkoutProgram {
     public boolean isActive() { return isActive; }
     public void setActive(boolean active) { isActive = active; }
 
-    public List<WorkoutDay> getDays() { return days; }
-    public void setDays(List<WorkoutDay> days) { this.days = days; }
+    public Map<String, WorkoutDay> getDays() { return days; }
+    public void setDays(Map<String, WorkoutDay> days) { this.days = days; }
 }

@@ -5,6 +5,7 @@ public class PerformanceRecord {
     private String recordId;
     private String programId;
     private String exerciseId;
+    private String muscleGroupId;  // לשימוש האלגוריתם לחישוב ביצועי שריר
     private String date;
 
     private int plannedSets;
@@ -19,11 +20,13 @@ public class PerformanceRecord {
     }
 
     public PerformanceRecord(String recordId, String programId, String exerciseId,
-                             String date, int plannedSets, int plannedReps,
+                             String muscleGroupId, String date,
+                             int plannedSets, int plannedReps,
                              int actualSets, int actualReps, boolean completed) {
         this.recordId = recordId;
         this.programId = programId;
         this.exerciseId = exerciseId;
+        this.muscleGroupId = muscleGroupId;
         this.date = date;
         this.plannedSets = plannedSets;
         this.plannedReps = plannedReps;
@@ -40,6 +43,9 @@ public class PerformanceRecord {
 
     public String getExerciseId() { return exerciseId; }
     public void setExerciseId(String exerciseId) { this.exerciseId = exerciseId; }
+
+    public String getMuscleGroupId() { return muscleGroupId; }
+    public void setMuscleGroupId(String muscleGroupId) { this.muscleGroupId = muscleGroupId; }
 
     public String getDate() { return date; }
     public void setDate(String date) { this.date = date; }

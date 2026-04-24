@@ -1,101 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7F8FA"
-    android:padding="24dp"
-    android:fillViewport="true">
+    android:background="#F7F8FA">
 
-    <LinearLayout
+    <!-- Toolbar עם תפריט 3 נקודות -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:layoutDirection="rtl">
+        android:layout_height="wrap_content">
 
-        <!-- Title -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="Welcome back!"
-            android:textColor="#111827"
-            android:textSize="32sp"
-            android:textStyle="bold" />
-
-        <!-- Subtitle -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Choose an option to get started."
-            android:textColor="#6B7280"
-            android:textSize="16sp" />
-
-        <!-- Space -->
-        <Space
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="30dp" />
+            android:layout_height="?attr/actionBarSize"
+            android:background="#111827"
+            app:title="FitQuest"
+            app:titleTextColor="#FFFFFF"
+            app:subtitleTextColor="#9CA3AF" />
 
-        <!-- Workout Programs Button -->
-        <Button
-            android:id="@+id/btnWorkoutPrograms"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="My Workout Programs"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:backgroundTint="@android:color/black"
-            android:layout_marginBottom="12dp"
-            android:onClick="goToWorkoutPrograms" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- Generate New Program Button -->
-        <Button
-            android:id="@+id/btnGenerateProgram"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="Generate New Program"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:backgroundTint="@android:color/black"
-            android:layout_marginBottom="12dp"
-            android:onClick="goToGenerateProgram" />
+    <!-- מיכל ה-Fragments -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_marginBottom="56dp" />
 
-        <!-- Progress Button -->
-        <Button
-            android:id="@+id/btnProgress"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="My Progress"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:backgroundTint="@android:color/black"
-            android:layout_marginBottom="12dp"
-            android:onClick="goToProgress" />
+    <!-- BottomNavigationView -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:background="#FFFFFF"
+        app:menu="@menu/bottom_nav_menu"
+        app:itemIconTint="#111827"
+        app:itemTextColor="#111827"
+        app:labelVisibilityMode="labeled" />
 
-        <!-- Profile Button -->
-        <Button
-            android:id="@+id/btnProfile"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="Profile"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:backgroundTint="@android:color/black"
-            android:layout_marginBottom="12dp"
-            android:onClick="goToProfile" />
-
-        <!-- Logout Button -->
-        <Button
-            android:id="@+id/btnLogout"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="Log Out"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:backgroundTint="#E0E0E0"
-            android:layout_marginBottom="12dp"
-            android:onClick="logout" />
-
-    </LinearLayout>
-</ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
