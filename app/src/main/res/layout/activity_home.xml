@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="#F7F8FA">
 
     <!-- Toolbar עם תפריט 3 נקודות -->
@@ -23,24 +24,22 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- מיכל ה-Fragments -->
+    <!-- מיכל ה-Fragments - תופס את כל השטח הפנוי -->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_marginBottom="56dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <!-- BottomNavigationView -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_gravity="bottom"
         android:background="#FFFFFF"
         app:menu="@menu/bottom_nav_menu"
         app:itemIconTint="#111827"
         app:itemTextColor="#111827"
         app:labelVisibilityMode="labeled" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

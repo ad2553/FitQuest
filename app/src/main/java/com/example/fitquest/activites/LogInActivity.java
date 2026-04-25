@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import static com.example.fitquest.FBRef.refAuth;
 
+import android.util.Patterns;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fitquest.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -46,9 +49,7 @@ public class LogInActivity extends AppCompatActivity {
 
         if (stay) {
             String email = settings.getString("email", "");
-            String pass  = settings.getString("pass", "");
             eTEmail.setText(email);
-            eTPass.setText(pass);
             cBStay.setChecked(true);
         }
     }
@@ -61,8 +62,7 @@ public class LogInActivity extends AppCompatActivity {
         String email = eTEmail.getText().toString().trim();
         String pass  = eTPass.getText().toString();
 
-        if (email.isEmpty() || pass.isEmpty()) {
-            tVMsg.setText("Please fill all fields");
+        if (!validateInput(email, pass)) {
             return;
         }
 
@@ -83,7 +83,6 @@ public class LogInActivity extends AppCompatActivity {
                             if (cBStay.isChecked()) {
                                 editor.putBoolean("stayConnect", true);
                                 editor.putString("email", email);
-                                editor.putString("pass", pass);
                             } else {
                                 editor.putBoolean("stayConnect", false);
                             }
@@ -98,6 +97,42 @@ public class LogInActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    /**
+     * מבצעת וולידציה לקלט המשתמש.
+     * @return true אם הקלט תקין, false אחרת.
+     */
+    private boolean validateInput(String email, String pass) {
+        boolean isValid = true;
+
+        if (email.isEmpty()) {
+            eTEmail.setError("Email is required");
+            isValid = false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            eTEmail.setError("Please enter a valid email");
+            isValid = false;
+        }
+
+        if (pass.isEmpty()) {
+            eTPass.setError("Password is required");
+            isValid = false;
+        } else if (pass.length() < 6) {
+            eTPass.setError("Password must be at least 6 characters");
+            isValid = false;
+        } else if (pass.length() > 20) {
+            eTPass.setError("Password must be at most 20 characters");
+            isValid = false;
+        }
+
+        if (!isValid) {
+            tVMsg.setText("Please correct the errors above");
+            Toast.makeText(this, "Invalid login details", Toast.LENGTH_SHORT).show();
+        } else {
+            tVMsg.setText(""); // Clear message if valid
+        }
+
+        return isValid;
     }
 
     /** מעבר למסך ההרשמה */

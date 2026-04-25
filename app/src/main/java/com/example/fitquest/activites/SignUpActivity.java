@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import static com.example.fitquest.FBRef.refAuth;
 import static com.example.fitquest.FBRef.refUsers;
 
+import android.util.Patterns;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fitquest.R;
 import com.example.fitquest.classes.User;
@@ -69,15 +72,13 @@ public class SignUpActivity extends AppCompatActivity {
      * מבצעת יצירת משתמש ב-Firebase ומאחסנת את הנתונים שלו.
      */
     public void createUser(View view) {
+        // בדיקה מקיפה של כל שדות הקלט
+        if (!validateInput()) {
+            return;
+        }
 
         String email = eTEmail.getText().toString().trim();
         String pass  = eTPass.getText().toString();
-
-        // בדיקה בסיסית של שדות חובה
-        if (email.isEmpty() || pass.isEmpty()) {
-            tVMsg.setText("Please fill all required fields");
-            return;
-        }
 
         ProgressDialog pd = new ProgressDialog(this);
         pd.setTitle("Connecting");
@@ -137,6 +138,132 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    /**
+     * מבצעת וולידציה מקיפה לכל שדות ההרשמה.
+     * @return true אם כל השדות תקינים, false אחרת.
+     */
+    private boolean validateInput() {
+        boolean isValid = true;
+
+        String username = eTUsername.getText().toString().trim();
+        String email = eTEmail.getText().toString().trim();
+        String pass = eTPass.getText().toString();
+        String ageStr = eTAge.getText().toString().trim();
+        String weightStr = eTWeight.getText().toString().trim();
+        String heightStr = eTHeight.getText().toString().trim();
+        String activityStr = eTActivity.getText().toString().trim();
+
+        // בדיקת שם משתמש
+        if (username.isEmpty()) {
+            eTUsername.setError("Username is required");
+            isValid = false;
+        } else if (username.length() < 3) {
+            eTUsername.setError("Username must be at least 3 characters");
+            isValid = false;
+        } else if (username.length() > 20) {
+            eTUsername.setError("Username must be at most 20 characters");
+            isValid = false;
+        }
+
+        // בדיקת אימייל
+        if (email.isEmpty()) {
+            eTEmail.setError("Email is required");
+            isValid = false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            eTEmail.setError("Please enter a valid email");
+            isValid = false;
+        }
+
+        // בדיקת סיסמה
+        if (pass.isEmpty()) {
+            eTPass.setError("Password is required");
+            isValid = false;
+        } else if (pass.length() < 6) {
+            eTPass.setError("Password must be at least 6 characters");
+            isValid = false;
+        } else if (pass.length() > 20) {
+            eTPass.setError("Password must be at most 20 characters");
+            isValid = false;
+        }
+
+        // בדיקת גיל
+        if (ageStr.isEmpty()) {
+            eTAge.setError("Age is required");
+            isValid = false;
+        } else {
+            try {
+                int age = Integer.parseInt(ageStr);
+                if (age < 5 || age > 120) {
+                    eTAge.setError("Age must be between 5 and 120");
+                    isValid = false;
+                }
+            } catch (NumberFormatException e) {
+                eTAge.setError("Please enter a valid number");
+                isValid = false;
+            }
+        }
+
+        // בדיקת משקל
+        if (weightStr.isEmpty()) {
+            eTWeight.setError("Weight is required");
+            isValid = false;
+        } else {
+            try {
+                double weight = Double.parseDouble(weightStr);
+                if (weight < 20 || weight > 400) {
+                    eTWeight.setError("Weight must be between 20 and 400 kg");
+                    isValid = false;
+                }
+            } catch (NumberFormatException e) {
+                eTWeight.setError("Please enter a valid number");
+                isValid = false;
+            }
+        }
+
+        // בדיקת גובה
+        if (heightStr.isEmpty()) {
+            eTHeight.setError("Height is required");
+            isValid = false;
+        } else {
+            try {
+                double height = Double.parseDouble(heightStr);
+                if (height < 50 || height > 250) {
+                    eTHeight.setError("Height must be between 50 and 250 cm");
+                    isValid = false;
+                }
+            } catch (NumberFormatException e) {
+                eTHeight.setError("Please enter a valid number");
+                isValid = false;
+            }
+        }
+
+        // בדיקת רמת פעילות
+        if (activityStr.isEmpty()) {
+            eTActivity.setError("Activity level is required");
+            isValid = false;
+        } else {
+            try {
+                int activity = Integer.parseInt(activityStr);
+                if (activity < 1 || activity > 7) {
+                    eTActivity.setError("Activity must be between 1 and 7 days");
+                    isValid = false;
+                }
+            } catch (NumberFormatException e) {
+                eTActivity.setError("Please enter a valid number");
+                isValid = false;
+            }
+        }
+
+        if (!isValid) {
+            tVMsg.setText("Please correct the errors in the form");
+            Toast.makeText(this, "Please check the highlighted fields", Toast.LENGTH_SHORT).show();
+        } else {
+            tVMsg.setText("");
+        }
+
+        return isValid;
     }
 
     /** מעבר למסך ההתחברות */

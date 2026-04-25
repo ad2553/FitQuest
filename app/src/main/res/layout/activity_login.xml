@@ -92,6 +92,7 @@
                 android:background="@android:color/transparent"
                 android:inputType="textPassword"
                 android:textDirection="rtl"
+                android:maxLength="20"
                 android:padding="8dp" />
 
         </LinearLayout>
