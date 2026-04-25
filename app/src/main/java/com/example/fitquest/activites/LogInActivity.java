@@ -58,7 +58,7 @@ public class LogInActivity extends AppCompatActivity {
      * פונקציה המופעלת בעת לחיצה על כפתור "Log In".
      * מבצעת אימות מול Firebase Auth.
      */
-    public void login(View view) {
+    public void loginUser(View view) {
         String email = eTEmail.getText().toString().trim();
         String pass  = eTPass.getText().toString();
 

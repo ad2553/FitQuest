@@ -246,8 +246,8 @@ public class SignUpActivity extends AppCompatActivity {
         } else {
             try {
                 int activity = Integer.parseInt(activityStr);
-                if (activity < 1 || activity > 7) {
-                    eTActivity.setError("Activity must be between 1 and 7 days");
+                if (activity < 1 || activity > 5) {
+                    eTActivity.setError("Activity must be between 1 and 5");
                     isValid = false;
                 }
             } catch (NumberFormatException e) {
