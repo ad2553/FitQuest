@@ -7,7 +7,10 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fitquest.R;
-
+/**
+ * האקטיביטי הראשונה שמוצגת לאחר מסך הפתיחה (עבור משתמשים שאינם מחוברים).
+ * משמשת כמסך שער (Welcome Screen) ומאפשרת ניווט למסך ההתחברות או למסך ההרשמה.
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override

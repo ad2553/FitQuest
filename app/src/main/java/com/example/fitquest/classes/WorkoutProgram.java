@@ -2,6 +2,10 @@ package com.example.fitquest.classes;
 
 import java.util.Map;
 
+/**
+ * מחלקה המייצגת תוכנית אימונים מלאה.
+ * מורכבת מאוסף של ימי אימון (WorkoutDay) ומיועדת למעקב אחרי התקדמות המתאמן לאורך זמן.
+ */
 public class WorkoutProgram {
 
     private String programId;

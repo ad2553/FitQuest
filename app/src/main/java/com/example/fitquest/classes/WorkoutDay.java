@@ -2,6 +2,10 @@ package com.example.fitquest.classes;
 
 import java.util.Map;
 
+/**
+ * מחלקה המייצגת יום אימון ספציפי מתוך תוכנית אימונים.
+ * מכילה רשימה של תרגילים לביצוע ביום זה ומעקב אחר סטטוס ההשלמה של היום.
+ */
 public class WorkoutDay {
 
     private String dayId;

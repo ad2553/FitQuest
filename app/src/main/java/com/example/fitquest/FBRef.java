@@ -4,7 +4,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-
+/**
+ * מחלקת עזר (Utility Class) לניהול מצביעי מסד הנתונים של Firebase.
+ * מכילה הפניות סטטיות (Static References) לכל הנתיבים המרכזיים ב-Realtime Database
+ * כדי למנוע כפילות קוד (Code Duplication) ברחבי האפליקציה.
+ */
 public class FBRef {
     public static FirebaseAuth refAuth = FirebaseAuth.getInstance();
 

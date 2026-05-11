@@ -1,5 +1,9 @@
 package com.example.fitquest.classes;
 
+/**
+ * מחלקה המייצגת תרגיל בסיסי במערכת.
+ * מכילה את פרטי התרגיל, הקושי, קבוצת השרירים אליה הוא שייך והגדרות העבודה (סטים וחזרות).
+ */
 public class Exercise {
 
     private String exerciseId;

@@ -1,5 +1,9 @@
 package com.example.fitquest.classes;
 
+/**
+ * מחלקה המייצגת מעקב ורישום של ביצוע תרגיל (היסטוריה).
+ * משמשת להשוואה בין כמות הסטים והחזרות שתוכננו לבין מה שבוצע בפועל.
+ */
 public class PerformanceRecord {
 
     private String recordId;
